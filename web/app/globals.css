@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+/* Ground Up tokens. Zinc neutrals + one pitch-green accent. Shape rule: inputs/buttons rounded-lg, panels rounded-2xl. */
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --ink: #18181b;
+  --muted: #52525b;
+  --faint: #71717a;
+  --line: #e4e4e7;
+  --accent: #047857;
+  --accent-ink: #f0fdf4;
+  --accent-soft: #ecfdf5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c0c0e;
+    --surface: #141417;
+    --ink: #f4f4f5;
+    --muted: #a1a1aa;
+    --faint: #8b8b93;
+    --line: #27272a;
+    --accent: #34d399;
+    --accent-ink: #052e1f;
+    --accent-soft: #0b2a20;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+@utility btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 h-10 text-sm font-medium transition active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none bg-accent text-accent-ink hover:opacity-90;
+}
+@utility btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 h-10 text-sm font-medium transition active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none border border-line bg-surface text-ink hover:bg-bg;
+}
+@utility field {
+  @apply w-full rounded-lg border border-line bg-surface px-3 py-2 min-h-10 text-sm text-ink placeholder:text-faint outline-none focus:border-accent focus:ring-2 focus:ring-accent/20;
+}
+@utility panel {
+  @apply rounded-2xl border border-line bg-surface;
+}

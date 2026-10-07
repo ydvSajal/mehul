@@ -1,0 +1,22 @@
+# Render Blueprint (Stage 1, free tier). Database lives on Neon, not Render.
+services:
+  - type: web
+    name: groundup-api
+    runtime: docker
+    rootDir: api
+    dockerfilePath: ./Dockerfile
+    plan: free
+    region: singapore
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: ENV
+        value: production
+      - key: DATABASE_URL # Neon pooled connection string (-pooler host, sslmode=require)
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: CORS_ORIGINS # e.g. https://groundup.vercel.app
+        sync: false

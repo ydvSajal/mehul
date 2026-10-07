@@ -1,0 +1,28 @@
+# Local dev: Postgres + API in Linux containers (Windows Smart App Control blocks psycopg/sklearn DLLs on host).
+# Web runs on host: cd web && npm run dev
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: groundup
+      POSTGRES_PASSWORD: groundup
+      POSTGRES_DB: groundup
+    ports: ["5433:5432"] # 5433 on host to avoid clashing with other local Postgres
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "groundup"]
+      interval: 2s
+      retries: 20
+  api:
+    build: ./api
+    environment:
+      DATABASE_URL: postgresql://groundup:groundup@db:5432/groundup
+      CORS_ORIGINS: http://localhost:3000
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+    ports: ["8001:8000"] # 8001 on host; 8000 often taken
+    volumes: ["./api:/app", "/app/.venv"]
+    depends_on:
+      db: { condition: service_healthy }
+    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+volumes:
+  pgdata:
