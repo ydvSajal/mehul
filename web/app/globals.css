@@ -55,6 +55,17 @@ body {
 @utility field {
   @apply w-full rounded-lg border border-line bg-surface px-3 py-2 min-h-10 text-sm text-ink placeholder:text-faint outline-none focus:border-accent focus:ring-2 focus:ring-accent/20;
 }
+/* Frosted glass over photography. Web approximation (backdrop-filter), solid fallback below. */
+@utility glass {
+  @apply border border-white/15 bg-white/10 text-white backdrop-blur-xl backdrop-saturate-150 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)];
+}
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    background: rgb(24 24 27 / 0.92);
+    backdrop-filter: none;
+  }
+}
+
 @utility panel {
   @apply rounded-2xl border border-line bg-surface;
 }

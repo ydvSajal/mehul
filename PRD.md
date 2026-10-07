@@ -38,7 +38,7 @@ Ground Up is a sports network that connects athletes, coaches, scouts and teams.
 | F2 | ID verification request (doc type + status; never store ID number) | Built (status = pending; no provider) |
 | F3 | Profile setup: mode, sport, position, age, city, region, level, skills, goals, bio | Built |
 | F4 | Feed: create post, list posts (keyset pagination) | Built |
-| F5 | Opportunities: list, synthetic generator (fixed seed, labelled `synthetic`) | Built. Posting UI for orgs: planned |
+| F5 | Opportunities: immersive tilt-card gallery with expand-to-detail, filters, sort; synthetic generator (fixed seed, labelled `synthetic`) | Built. Apply flow and org posting UI: planned |
 | F6 | Matching engine: filter, score 0-100, rank, explain | Built (TF-IDF for goals; embeddings planned) |
 | F7 | People you may know (content similarity on profiles) | Built (simple) |
 | F8 | Evaluation module (NDCG@K, baselines, ablation, human-rated sample) | Planned week 3-4 |

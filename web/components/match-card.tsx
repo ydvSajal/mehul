@@ -1,13 +1,13 @@
 import { CalendarBlank, MapPin } from "@phosphor-icons/react";
 import type { Match } from "@/lib/api";
 
-export function ScoreRing({ score, size = 56 }: { score: number; size?: number }) {
+export function ScoreRing({ score, size = 56, track = "stroke-line" }: { score: number; size?: number; track?: string }) {
   const r = size / 2 - 4;
   const c = 2 * Math.PI * r;
   return (
     <div className="relative shrink-0" style={{ width: size, height: size }} aria-label={`Match score ${score} out of 100`}>
       <svg width={size} height={size} className="-rotate-90">
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" strokeWidth={4} className="stroke-line" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" strokeWidth={4} className={track} />
         <circle
           cx={size / 2} cy={size / 2} r={r} fill="none" strokeWidth={4} strokeLinecap="round"
           className="stroke-accent" strokeDasharray={c} strokeDashoffset={c * (1 - score / 100)}
